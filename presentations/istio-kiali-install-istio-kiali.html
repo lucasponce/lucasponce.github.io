@@ -12,6 +12,7 @@
 
 		<!-- Theme used for syntax highlighting of code -->
 		<link rel="stylesheet" href="lib/css/monokai.css">
+		<link rel="stylesheet" href="lib/css/zenburn.css"/>
 
 		<!-- Printing and PDF exports -->
 		<script>
@@ -21,11 +22,259 @@
 			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
 			document.getElementsByTagName( 'head' )[0].appendChild( link );
 		</script>
+		<style>
+			.my-red {
+				color: #ff2c2d;
+			}
+			.my-green {
+				color: #17ff2e;
+			}
+			.my-center {
+				text-align: center !important;
+			}
+		</style>
 	</head>
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section>Installation steps</section>
+
+				<section>
+					<h2>Install Istio and upgrade Kiali</h2>
+				</section>
+
+				<section>
+					<h3>[0] Check pre-requisites</h3>
+					<ol>
+						<li><a href="https://cloud.google.com/sdk" target="_blank"><code>google-cloud-sdk</code></a> correctly installed</li>
+						<li class="fragment"><a href="https://cloud.google.com/sdk/docs/components#managing_cloud_sdk_components" target="_blank"><code>kubectl</code></a> client installed</li>
+						<li class="fragment"><a href="https://helm.sh/docs/using_helm/#installing-helm"><code>helm</code></a> correctly installed</li>
+						<li class="fragment"><a href="https://archive.istio.io/v1.1/docs/setup/kubernetes/download/"><code>Istio 1.1.2</code></a> downloaded</li>
+						<li class="fragment"><code><span class="my-green">ISTIO_HOME</span></code> variable defined</li>
+						<li class="fragment">Update/validate <code><span class="my-green">PATH</span></code></li>
+						<li class="fragment">Bonus track: No clashes with other <span class="my-red">kubectl</span> clients !</li>
+					</ol>
+				</section>
+
+				<section>
+					<h3>[1] Create a Kubernetes cluster</h3>
+					<p>
+						Choose a cluster name i.e. <span class="my-green">lucas-cluster</span>
+					<pre class="bash"><code data-trim data-line-numbers="1-3">
+gcloud container clusters create lucas-cluster \
+  --cluster-version latest \
+  --num-nodes 4
+
+# Output
+
+Creating cluster lucas-cluster... Cluster is being health-checked (master is healthy)...done.
+Created [https://container.googleapis.com/v1/projects/kubernetes-istio-kiali/zones/europe-west2-a/clusters/lucas-cluster].
+kubeconfig entry generated for lucas-cluster.
+NAME           LOCATION        MASTER_VERSION  MASTER_IP       MACHINE_TYPE   NODE_VERSION  NUM_NODES  STATUS
+lucas-cluster  europe-west2-a  1.13.7-gke.8    35.242.145.183  n1-standard-1  1.13.7-gke.8  4          RUNNING
+
+					</code></pre>
+					</p>
+				</section>
+
+				<section>
+					<h3>[2] Retrieve your credentials</h3>
+					<p></p>
+					<pre class="bash"><code data-trim data-line-numbers="1">
+gcloud container clusters get-credentials lucas-cluster
+
+# Output
+
+Fetching cluster endpoint and auth data.
+kubeconfig entry generated for lucas-cluster.
+
+</code></pre>
+				</section>
+
+				<section>
+					<h3>[3] Grant cluster administrator (admin) permissions</h3>
+					<p>To create the necessary RBAC rules for Istio, the current user requires admin access</p>
+					<pre class="bash"><code data-trim data-line-numbers="1-3">
+kubectl create clusterrolebinding cluster-admin-binding \
+  --clusterrole=cluster-admin \
+  --user=$(gcloud config get-value core/account)
+
+# Output
+
+clusterrolebinding "cluster-admin-binding" created
+
+</code></pre>
+				</section>
+
+				<section>
+					<h3>[4] Install Istio definitions via helm</h3>
+					<pre class="bash"><code data-trim data-line-numbers="1-3,15-16">
+cd $ISTIO_HOME
+kubectl create namespace istio-system
+helm template install/kubernetes/helm/istio-init --name istio-init --namespace istio-system | kubectl apply -f -
+
+# Output
+
+configmap "istio-crd-10" created
+configmap "istio-crd-11" created
+serviceaccount "istio-init-service-account" created
+clusterrole "istio-init-istio-system" created
+clusterrolebinding "istio-init-admin-role-binding-istio-system" created
+job "istio-init-crd-10" created
+job "istio-init-crd-11" created
+
+# Verify 53 CRDs are created.
+kubectl get crds | grep 'istio.io\|certmanager.k8s.io' | wc -l
+
+</code></pre>
+				</section>
+
+				<section>
+					<h3>[5] Install istio demo profile</h3>
+					<pre class="bash"><code data-trim data-line-numbers="1-5">
+helm template install/kubernetes/helm/istio --name istio --namespace istio-system \
+  --values install/kubernetes/helm/istio/values-istio-demo.yaml | kubectl apply -f -
+
+# Verify all Istio pods are up and running
+kubectl get pods -n istio-system -w
+</code></pre>
+				</section>
+
+				<section>
+					<section>
+						<h3>[6.0] Expose the Telemetry add-ons</h3>
+						<p>For <span class="my-red">demo</span> purposes we will use <span class="my-red">HTTP</span> instead <span class="my-green">HTTPS</span></p>
+						<pre class="bash"><code data-trim data-line-numbers="1-9">
+curl -L https://git.io/fj2rL | kubectl apply -f -
+
+# Define variables
+export INGRESS_HOST=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+
+export KIALI_URL="http://${INGRESS_HOST}:15029/kiali"
+export PROMETHEUS_URL="http://${INGRESS_HOST}:15030/"
+export GRAFANA_URL="http://${INGRESS_HOST}:15031/"
+export JAEGER_URL="http://${INGRESS_HOST}:15032/jaeger"
+</code></pre>
+					</section>
+
+					<section>
+						<h3>[6.1] Open your URLs</h3>
+						<pre class="bash"><code data-trim data-line-numbers="1-10">
+# Linux helper
+# xdg-open is a command to open a browser from the command line.
+# Mac users can use "open" command
+# Windows users can use "cmd" command
+# Otherwise, the check is just to confirm you can access addons from your browser
+
+xdg-open ${KIALI_URL} && \
+xdg-open ${PROMETHEUS_URL} && \
+xdg-open ${GRAFANA_URL} && \
+xdg-open ${JAEGER_URL}
+</code></pre>
+					</section>
+
+					<section>
+						<h3>[6.2] Check Telemetry add-ons</h3>
+						<p>
+							<table>
+								<tr>
+									<td class="my-center">
+										<img src="images/kiali-0.16.png" alt="kiali" width="250" />
+										<img src="images/grafana.png" alt="grafana" width="250" />
+									</td>
+									<td class="my-center">
+										<img src="images/prometheus.png" alt="prometheus" width="250" />
+										<img src="images/jaeger.png" alt="jaeger" width="250" />
+									</td>
+								</tr>
+							</table>
+						</p>
+					</section>
+
+				</section>
+
+				<section>
+
+					<section>
+						<h3>[7.0] Install Bookinfo on <span class="my-green">default</span> namespace</h3>
+						<pre class="bash"><code data-trim data-line-numbers="1-5">
+kubectl label namespace default istio-injection=enabled
+kubectl apply -f samples/bookinfo/platform/kube/bookinfo.yaml
+
+# Verify all Bookinfo pods are running
+kubectl get pods -w
+</code></pre>
+					</section>
+
+					<section>
+						<h3>[7.1] Expose Bookinfo through <span class="my-green">Ingress</span></h3>
+						<pre class="bash"><code data-trim data-line-numbers="1-5">
+kubectl apply -f samples/bookinfo/networking/bookinfo-gateway.yaml
+
+# Verify user can access Bookinfo app
+export INGRESS_PORT=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.spec.ports[?(@.name=="http2")].port}')
+xdg-open http://${INGRESS_HOST}:${INGRESS_PORT}/productpage
+</code></pre>
+						<p>
+							<img src="images/bookinfo.png" alt="bookinfo" width="250" />
+						</p>
+					</section>
+
+					<section>
+						<h3>[7.2] Observe Bookinfo from Kiali</h3>
+						<p>
+							<span>
+								<img src="images/kiali-0.16-dashboard.png" alt="kiali dashboard" width="250" />
+								<img src="images/kiali-0.16-graph.png" alt="kiali graph" width="250" />
+							</span>
+						</p>
+					</section>
+
+				</section>
+
+				<section>
+
+					<section>
+						<h3>[8.0] Upgrade Kiali</h3>
+						<p>Istio ships a v0.16 version, let's upgrade to a newer one</p>
+						<pre class="bash"><code data-trim data-line-numbers="1-5">
+curl -L https://git.io/fjrX5 | envsubst > $HOME/update-kiali-cr.yaml
+bash <(curl -L https://git.io/getLatestKialiOperator) --kiali-cr $HOME/update-kiali-cr.yaml
+
+# Verify Kiali pod is restarted
+kubectl get pods -n istio-system -w
+</code></pre>
+					</section>
+
+					<section>
+						<h3>[8.1] Refresh Kiali</h3>
+						<p>
+							Check Kiali has upgraded to 1.1 version
+						</p>
+						<p>
+							<img src="images/kiali-1.1.png" alt="kiali 1.1" width="500" />
+						</p>
+					</section>
+
+					<section>
+						<h3>[8.2] Useful troubleshooting</h3>
+						<p>
+							Just if something went wrong
+						</p>
+						<pre class="bash"><code data-trim>
+# kiali-operator namespace is "Terminating" but hanged
+kubectl patch kiali kiali -n kiali-operator -p '{"metadata":{"finalizers": []}}' --type=merge
+
+# Delete a kubernetes cluster i.e. lucas-cluster
+gcloud container clusters delete lucas-cluster
+</code></pre>
+					</section>
+
+					<section>
+						<h2>End of Workshop part [1]</h2>
+					</section>
+				</section>
+
+
 			</div>
 		</div>
 
