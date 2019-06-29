@@ -12,6 +12,7 @@
 
 		<!-- Theme used for syntax highlighting of code -->
 		<link rel="stylesheet" href="lib/css/monokai.css">
+		<link rel="stylesheet" href="lib/css/zenburn.css"/>
 
 		<!-- Printing and PDF exports -->
 		<script>
@@ -21,11 +22,103 @@
 			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
 			document.getElementsByTagName( 'head' )[0].appendChild( link );
 		</script>
+		<style>
+			.my-red {
+				color: #ff2c2d;
+			}
+			.my-green {
+				color: #17ff2e;
+			}
+			.my-center {
+				text-align: center !important;
+			}
+		</style>
+
 	</head>
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section>Travel Agency scenarios</section>
+
+				<section>
+					<h2>[2] Kiali: Observability in Action</h2>
+				</section>
+
+				<section>
+					<h3>[2.1] Goals</h3>
+					<ol>
+						<li>Multiple namespaces scenarios</li>
+						<li>Correlate metrics, traces and logs</li>
+						<li>A/B testing</li>
+						<li>Apply Istio configuration through Kiali actions</li>
+					</ol>
+				</section>
+
+				<section>
+					<h3>[2.2] Deploy <span class="my-green">travel-agency</span></h3>
+					<p>Version 1</p>
+					<pre class="bash"><code data-trim data-line-numbers="1-5">
+kubectl create namespace travel-agency
+kubectl label namespace travel-agency istio-injection=enabled
+kubectl apply -f <(curl -L https://git.io/fjoH0) -n travel-agency
+
+# Verify travel-agency pods are up and running
+kubectl get pods -n travel-agency -w
+
+# Troubleshooting - Delete workloads and services
+kubectl delete -f <(curl -L https://git.io/fjoH0) -n travel-agency
+</code></pre>
+				</section>
+
+				<section>
+					<h3>[2.3] Deploy <span class="my-green">travel-portal</span></h3>
+					<pre class="bash"><code data-trim data-line-numbers="1-5">
+kubectl create namespace travel-portal
+kubectl label namespace travel-portal istio-injection=enabled
+kubectl apply -f <(curl -L https://git.io/fjoQ1) -n travel-portal
+
+# Verify pods
+kubectl get pods -n travel-portal -w
+
+# Troubleshooting - Delete workloads and services
+kubectl delete -f <(curl -L https://git.io/fjoQ1) -n travel-portal
+</code></pre>
+				</section>
+
+				<section>
+					<h3>[2.4] Check Travel Agency Demo</h3>
+					<p>
+						<span>
+							<img src="images/travel-agency-dashboard.png" alt="Kiali dashboard" width="500" />
+							<img src="images/travel-agency-graph.png" alt="travel agency graph" width="500" />
+						</span>
+					</p>
+				</section>
+
+				<section>
+					<h3>[2.5] Explore Kiali</h3>
+					<p>Suggestions</p>
+					<ol>
+						<li>Graph: visualization options</li>
+						<li>Search and filter Applications, Workload, Services</li>
+						<li>Metrics, Logs, Traces</li>
+						<li>Istio configuration</li>
+					</ol>
+				</section>
+
+				<section>
+					<h3>[2.6] Deploy <span class="my-green">travel-agency</span></h3>
+					<p>Version 2</p>
+					<pre class="bash"><code data-trim data-line-numbers="1-4">
+kubectl apply -f <(curl -L https://git.io/fjo7s) -n travel-agency
+
+# Verify pods
+kubectl get pods -n travel-agency -w
+
+# Troubleshooting - Delete workloads and services
+kubectl delete -f <(curl -L https://git.io/fjo7s) -n travel-agency
+</code></pre>
+				</section>
+
 			</div>
 		</div>
 
