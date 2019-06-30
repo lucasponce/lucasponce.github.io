@@ -88,28 +88,92 @@ kubectl delete -f <(curl -L https://git.io/fjoQ1) -n travel-portal
 				</section>
 
 				<section>
-					<h3>[2.4] Check Travel Agency Demo</h3>
-					<p>
-						<span>
-							<img src="images/travel-agency-dashboard.png" alt="Kiali dashboard" width="500" />
-							<img src="images/travel-agency-graph.png" alt="travel agency graph" width="500" />
-						</span>
-					</p>
+					<section>
+						<h3>[2.4.0] Explore Kiali</h3>
+						<p>Walkthrough</p>
+						<ol>
+							<li>Namespaces dashboard</li>
+							<li>Graph: visualization options</li>
+							<li>Search and filter Applications, Workload, Services</li>
+							<li>Metrics, Logs, Traces</li>
+							<li>Istio configuration</li>
+						</ol>
+					</section>
+
+					<section>
+						<h3>[2.4.1] Dashboard</h3>
+						<p>
+							<img src="images/travel-agency-dashboard.png" alt="Kiali dashboard" width="800" />
+						</p>
+						<p>
+							Filters, Sorting, Compact/Expand
+						</p>
+					</section>
+
+					<section>
+						<h3>[2.4.2] Graph options</h3>
+						<p>
+							<img src="images/travel-agency-graph.png" alt="travel agency graph" width="800" />
+						</p>
+						<p>
+							Graph types, Edge info, Find/Hide
+						</p>
+					</section>
+
+					<section>
+						<h3>[2.4.3] Applications, Workloads and Services</h3>
+						<p>
+							<img src="images/travel-agency-list.png" alt="travel agency app list" width="800" />
+						</p>
+						<p>
+							Filters, Sorting
+						</p>
+					</section>
+
+					<section>
+						<h3>[2.4.4] App,Wkld,Svc Details</h3>
+						<p>
+							<img src="images/travel-agency-details.png" alt="travel agency app details" width="800" />
+						</p>
+						<p>
+							Overview, Traffic, Logs/Traces, Metrics
+						</p>
+					</section>
+
+					<section>
+						<h3>[2.4.5] Metrics Details</h3>
+						<p>
+							<img src="images/travel-agency-metrics.png" alt="travel agency app metrics" width="800" />
+						</p>
+						<p>
+							Multiple selection criteria, Destination/Source telemetry
+						</p>
+					</section>
+
+					<section>
+						<h3>[2.4.6] Service Details</h3>
+						<p>
+							<img src="images/travel-agency-traces.png" alt="travel agency service traces" width="800" />
+						</p>
+						<p>
+							Traces integration per Service
+						</p>
+					</section>
+
+					<section>
+						<h3>[2.4.7] Workload Log Details</h3>
+						<p>
+							<img src="images/travel-agency-logs.png" alt="travel agency service logs" width="800" />
+						</p>
+						<p>
+							Traces integration per Service
+						</p>
+					</section>
+
 				</section>
 
 				<section>
-					<h3>[2.5] Explore Kiali</h3>
-					<p>Suggestions</p>
-					<ol>
-						<li>Graph: visualization options</li>
-						<li>Search and filter Applications, Workload, Services</li>
-						<li>Metrics, Logs, Traces</li>
-						<li>Istio configuration</li>
-					</ol>
-				</section>
-
-				<section>
-					<h3>[2.6] Deploy <span class="my-green">travel-agency</span></h3>
+					<h3>[2.5] Deploy <span class="my-green">travel-agency</span></h3>
 					<p>Version 2</p>
 					<pre class="bash"><code data-trim data-line-numbers="1-4">
 kubectl apply -f <(curl -L https://git.io/fjo7s) -n travel-agency
