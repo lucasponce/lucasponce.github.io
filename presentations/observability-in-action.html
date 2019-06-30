@@ -173,9 +173,11 @@ kubectl delete -f <(curl -L https://git.io/fjoQ1) -n travel-portal
 				</section>
 
 				<section>
-					<h3>[2.5] Deploy <span class="my-green">travel-agency</span></h3>
-					<p>Version 2</p>
-					<pre class="bash"><code data-trim data-line-numbers="1-4">
+
+					<section>
+						<h3>[2.5.0] Deploy <span class="my-green">travel-agency</span></h3>
+						<p>Version 2</p>
+						<pre class="bash"><code data-trim data-line-numbers="1-4">
 kubectl apply -f <(curl -L https://git.io/fjo7s) -n travel-agency
 
 # Verify pods
@@ -184,6 +186,120 @@ kubectl get pods -n travel-agency -w
 # Troubleshooting - Delete workloads and services
 kubectl delete -f <(curl -L https://git.io/fjo7s) -n travel-agency
 </code></pre>
+						<p>
+							Let's start an A/B Testing scenario
+						</p>
+					</section>
+
+					<section>
+						<h3>[2.5.1] Analyze Response Time</h3>
+						<p>
+							<img src="images/ab-response-time.png" alt="travel-agency response time" width="800" />
+						</p>
+						<p>
+							Spot potential bottlenecks
+						</p>
+					</section>
+
+					<section>
+						<h3>[2.5.2] Analyze detailed metrics</h3>
+						<p>
+							<img src="images/ab-metrics-details.png" alt="travels details metrics" width="800" />
+						</p>
+						<p>
+							Slower response since version 2 was deployed. Worse in vip portals.
+						</p>
+						<p>
+							Investigate more services.
+						</p>
+					</section>
+
+					<section>
+						<h3>[2.5.3] Analyze travel service traces</h3>
+						<p>
+							<img src="images/ab-travel-traces.png" alt="travel service traces" width="800" />
+						</p>
+						<p>
+							Confirm slow traces.
+						</p>
+					</section>
+
+					<section>
+						<h3>[2.5.4] Analyze workload logs</h3>
+						<p>
+							<img src="images/ab-logs-chaos-monkey.png" alt="workload logs" width="800" />
+						</p>
+						<p>
+							It seems version 2 introduced ChaosMonkey delays in several workloads.
+						</p>
+					</section>
+
+				</section>
+
+				<section>
+
+					<section>
+						<h3>[2.6.0] Matching routing</h3>
+						<p>
+							<img src="images/matching-routing.png" alt="matching routing rules" width="800" />
+						</p>
+						<p>
+							Apply on travels, hotels, insurances, cars and flight services
+						</p>
+					</section>
+
+					<section>
+						<h3>[2.6.1] Analyze traffic</h3>
+						<p>
+							<img src="images/traffic-matching-routing.png" alt="traffic after applying matching routing rules" width="800" />
+						</p>
+						<p>
+							Web portal traffic is back to normal response time
+						</p>
+					</section>
+
+				</section>
+
+				<section>
+					<section>
+						<h3>[2.7.0] Weighted Routing</h3>
+						<p>
+							<img src="images/discounts-comparison.png" alt="discounts service comparison" width="800" />
+						</p>
+						<p>
+							Evenly Splitted traffic between fast and slow versions
+						</p>
+					</section>
+
+					<section>
+						<h3>[2.7.1] Apply Weighted Routing</h3>
+						<p>
+							<img src="images/discounts-weighted-routing.png" alt="weighted routing rules" width="800" />
+						</p>
+						<p>
+							Reduce traffic routed to version 1
+						</p>
+					</section>
+
+					<section>
+						<h3>[2.7.2] Analyze traffic</h3>
+						<p>
+							<img src="images/discounts-new-traffic.png" alt="discuounts traffic after weighted rules applied" width="600" />
+						</p>
+						<p>
+							Slower version only gets a 10% of the traffic
+						</p>
+					</section>
+				</section>
+
+				<section>
+					<h2>End of Workshop part [2]</h2>
+					<p>
+						<a href="advanced-challenges.html">Continue to [3] Advanced challenges</a>
+					</p>
+					<p>
+						<a href="index.html">Back to Workshop Index</a>
+					</p>
 				</section>
 
 			</div>
