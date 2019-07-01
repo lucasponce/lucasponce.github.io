@@ -12,6 +12,7 @@
 
 		<!-- Theme used for syntax highlighting of code -->
 		<link rel="stylesheet" href="lib/css/monokai.css">
+		<link rel="stylesheet" href="lib/css/zenburn.css"/>
 
 		<!-- Printing and PDF exports -->
 		<script>
@@ -21,11 +22,104 @@
 			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
 			document.getElementsByTagName( 'head' )[0].appendChild( link );
 		</script>
+		<style>
+			.my-red {
+				color: #ff2c2d;
+			}
+			.my-green {
+				color: #17ff2e;
+			}
+			.my-center {
+				text-align: center !important;
+			}
+		</style>
 	</head>
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section>Travel agency challenges</section>
+
+				<section>
+					<h2>[3] Advanced challenges</h2>
+				</section>
+
+				<section>
+					<h3>[3.1] Goals</h3>
+					<ul>
+						<li>mTLS Security</li>
+						<li>Advanced Tracing</li>
+						<li>Chaos Engineering</li>
+					</ul>
+				</section>
+
+				<section>
+					<section>
+						<h3>[3.2.0] mTLS travel-agency</h3>
+						<pre class="bash"><code data-trim data-line-numbers="1-2">
+# Enable mTLS in travel-agency
+kubectl apply -f <(curl -L https://git.io/fjKnR)
+
+# Delete mTLS in travel-agency
+kubectl delete -f <(curl -L https://git.io/fjKnR)
+</code></pre>
+						<p>
+							Enable mutual TLS on <span class="my-green">travel-agency</span> services.
+						</p>
+					</section>
+
+					<section>
+						<h3>[3.2.1] Check mTLS travel-agency</h3>
+						<p>
+							<img src="images/security-travel-agency.png" alt="mTLS enabled in travel-agency" width="800" />
+						</p>
+						<p>
+							All services within namespace are TLS protected by Istio
+						</p>
+					</section>
+
+					<section>
+						<h3>[3.2.2] Mesh Policy</h3>
+						<pre class="bash"><code data-trim data-line-numbers="1-2">
+# Enable MeshPolicy
+kubectl apply -f <(curl -L https://git.io/fjKnY)
+
+# Delete MeshPolicy
+kubectl delete -f <(curl -L https://git.io/fjKnY)
+</code></pre>
+						<p>
+							Apply mutual TLS in <span class="my-red">all namespaces</span>
+						</p>
+					</section>
+
+					<section>
+						<h3>[3.2.3] Check Mesh Policy</h3>
+						<p>
+							<img src="images/meshpolicy.png" alt="mTLS enabled for whole cluster" width="800" />
+						</p>
+						<p>
+							All namespaces protected with mTLS
+						</p>
+					</section>
+
+				</section>
+
+				<section>
+					<h3>[3.3.0] Advanced Tracing</h3>
+				</section>
+
+				<section>
+					<h3>[3.4.0] Chaos Engineering</h3>
+				</section>
+
+				<section>
+					<h2>End of Workshop part [3]</h2>
+					<p>
+						Congratulations !
+					</p>
+					<p>
+						<a href="index.html">Back to Workshop Index</a>
+					</p>
+				</section>
+
 			</div>
 		</div>
 

@@ -12,6 +12,7 @@
 
 		<!-- Theme used for syntax highlighting of code -->
 		<link rel="stylesheet" href="lib/css/monokai.css">
+		<link rel="stylesheet" href="lib/css/zenburn.css"/>
 
 		<!-- Printing and PDF exports -->
 		<script>
@@ -21,15 +22,86 @@
 			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
 			document.getElementsByTagName( 'head' )[0].appendChild( link );
 		</script>
+		<style>
+			.my-red {
+				color: #ff2c2d;
+			}
+			.my-green {
+				color: #17ff2e;
+			}
+			.my-center {
+				text-align: center !important;
+			}
+		</style>
+
 	</head>
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section>Install Google Cloud SDK. Install kubectl.</section>
-				<section>Install Helm</section>
-				<section>Download Istio. Define variables.</section>
-				<section>Check commands used: envsubst, curl, etc</section>
-				<section>Check PATH.</section>
+
+				<section>
+					<h3>[0.0] Workshop account</h3>
+					<p>
+						TBD
+					</p>
+				</section>
+
+				<section>
+					<h3>[0.1] Install Google Cloud SDK</h3>
+					<p>
+						Choose your platform: <a href="https://cloud.google.com/sdk/" target="_blank">Google SDK</a>
+					</p>
+					<p>
+						Install <span class="my-red">kubectl</span> component
+					</p>
+				</section>
+
+				<section>
+					<h3>[0.2] Install Helm</h3>
+					<p>
+						<a href="https://helm.sh/docs/using_helm/#installing-helm" target="_blank">Installing the Helm Client</a>
+					</p>
+				</section>
+
+				<section>
+					<h3>[0.3] Get Istio</h3>
+					<p>
+						<a href="https://archive.istio.io/v1.1/" target="_blank">Get Istio 1.1</a>
+					</p>
+					<p>
+						Define <span class="my-green">ISTIO_HOME</span> variable.
+					</p>
+					<p>Installation will be detailed in next section</p>
+				</section>
+
+				<section>
+					<h3>[0.4] Sanity check of bash commands</h3>
+					<ul>
+						<li>envsubst</li>
+						<li>curl</li>
+					</ul>
+				</section>
+
+				<section>
+					<h3>[0.5] Check update your <span class="my-red">PATH</span></h3>
+					<ul>
+						<li>gcloud</li>
+						<li>kubectl</li>
+						<li>helm</li>
+						<li>envsubst</li>
+						<li>curl</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>End of prerequisites [0]</h2>
+					<p>
+						<a href="install-istio-kiali.html">Continue to [1] Install Istio and upgrade Kiali</a>
+					</p>
+					<p>
+						<a href="index.html">Back to Workshop Index</a>
+					</p>
+				</section>
 			</div>
 		</div>
 
