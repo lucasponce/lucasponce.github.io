@@ -104,10 +104,39 @@ kubectl delete -f <(curl -L https://git.io/fjKnY)
 
 				<section>
 					<h3>[3.3.0] Advanced Tracing</h3>
+					<p>
+						TBD
+					</p>
 				</section>
 
 				<section>
-					<h3>[3.4.0] Chaos Engineering</h3>
+					<section>
+						<h3>[3.4.0] Chaos Engineering</h3>
+						<ul>
+							<li>Clone <a href="https://github.com/lucasponce/travel-comparison-demo" target="_blank">travel agency project</a> </li>
+							<li>Prepare your docker account</li>
+						</ul>
+					</section>
+
+					<section>
+						<h3>[3.4.1] Travel Agency v3</h3>
+						<ul>
+							<li>Get familiar with <span class="my-green">travel_agency.go</span></li>
+							<li>Create a <span class="my-red">travel-agency v3</span></li>
+							<li>Personalize delays</li>
+							<li>Use Kiali to compare with v1 and spot differences</li>
+						</ul>
+					</section>
+
+					<section>
+						<h3>[3.4.2] Travel Agency v4</h3>
+						<ul>
+							<li>Travels service always queries to: flights, hotels, cars, insurances</li>
+							<li>Modify example to allow random queries (i.e. some users may not need a car)</li>
+							<li>Check how scenario changes when a cars service is down</li>
+						</ul>
+					</section>
+
 				</section>
 
 				<section>
