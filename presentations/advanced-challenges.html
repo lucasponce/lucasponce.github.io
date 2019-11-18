@@ -78,12 +78,18 @@ kubectl delete -f <(curl -L https://git.io/fjKnR)
 
 					<section>
 						<h3>[3.2.2] Mesh Policy</h3>
-						<pre class="bash"><code data-trim data-line-numbers="1-2">
+						<pre class="bash"><code data-trim data-line-numbers="1-5">
 # Enable MeshPolicy
 kubectl apply -f <(curl -L https://git.io/fjKnY)
 
+# Disable mTLS for ingress
+kubectl apply -f <(curl -L https://git.io/JeVtc)
+
 # Delete MeshPolicy
 kubectl delete -f <(curl -L https://git.io/fjKnY)
+
+# Enable mTLS for ingress
+kubectl delete -f <(curl -L https://git.io/JeVtc)
 </code></pre>
 						<p>
 							Apply mutual TLS in <span class="my-red">all namespaces</span>
