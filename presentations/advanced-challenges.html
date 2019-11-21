@@ -39,11 +39,11 @@
 			<div class="slides">
 
 				<section>
-					<h2>[3] Advanced challenges</h2>
+					<h2><a href="index.html">[3]</a> Advanced challenges</h2>
 				</section>
 
 				<section>
-					<h3>[3.1] Goals</h3>
+					<h3><a href="index.html">[3.1]</a> Goals</h3>
 					<ul>
 						<li>mTLS Security</li>
 						<li>Advanced Tracing</li>
@@ -53,7 +53,7 @@
 
 				<section>
 					<section>
-						<h3>[3.2.0] mTLS travel-agency</h3>
+						<h3><a href="index.html">[3.2.0]</a> mTLS travel-agency</h3>
 						<pre class="bash"><code data-trim data-line-numbers="1-2">
 # Enable mTLS in travel-agency
 kubectl apply -f <(curl -L https://git.io/fjKnR)
@@ -64,10 +64,13 @@ kubectl delete -f <(curl -L https://git.io/fjKnR)
 						<p>
 							Enable mutual TLS on <span class="my-green">travel-agency</span> services.
 						</p>
+						<p>
+							Note: <span class="my-red">Remove</span> or <span class="my-green">update</span> previous Istio Config rules to be compatible with MTLS
+						</p>
 					</section>
 
 					<section>
-						<h3>[3.2.1] Check mTLS travel-agency</h3>
+						<h3><a href="index.html">[3.2.1]</a> Check mTLS travel-agency</h3>
 						<p>
 							<img src="images/security-travel-agency.png" alt="mTLS enabled in travel-agency" width="800" />
 						</p>
@@ -77,7 +80,7 @@ kubectl delete -f <(curl -L https://git.io/fjKnR)
 					</section>
 
 					<section>
-						<h3>[3.2.2] Mesh Policy</h3>
+						<h3><a href="index.html">[3.2.2]</a> Mesh Policy</h3>
 						<pre class="bash"><code data-trim data-line-numbers="1-5">
 # Enable MeshPolicy
 kubectl apply -f <(curl -L https://git.io/fjKnY)
@@ -97,7 +100,7 @@ kubectl delete -f <(curl -L https://git.io/JeVtc)
 					</section>
 
 					<section>
-						<h3>[3.2.3] Check Mesh Policy</h3>
+						<h3><a href="index.html">[3.2.3]</a> Check Mesh Policy</h3>
 						<p>
 							<img src="images/meshpolicy.png" alt="mTLS enabled for whole cluster" width="800" />
 						</p>
@@ -110,7 +113,7 @@ kubectl delete -f <(curl -L https://git.io/JeVtc)
 
 				<section>
 					<section>
-						<h3>[3.3.0] Chaos Engineering</h3>
+						<h3><a href="index.html">[3.3.0]</a> Chaos Engineering</h3>
 						<ul>
 							<li>Clone <a href="https://github.com/lucasponce/travel-comparison-demo" target="_blank">travel agency project</a> </li>
 							<li>Prepare your docker account</li>
@@ -118,7 +121,7 @@ kubectl delete -f <(curl -L https://git.io/JeVtc)
 					</section>
 
 					<section>
-						<h3>[3.3.1] Travel Agency v3</h3>
+						<h3><a href="index.html">[3.3.1]</a> Travel Agency v3</h3>
 						<ul>
 							<li>Get familiar with <span class="my-green">travel_agency.go</span></li>
 							<li>Create a <span class="my-red">travel-agency v3</span></li>
@@ -128,7 +131,7 @@ kubectl delete -f <(curl -L https://git.io/JeVtc)
 					</section>
 
 					<section>
-						<h3>[3.3.2] Travel Agency v4</h3>
+						<h3><a href="index.html">[3.3.2]</a> Travel Agency v4</h3>
 						<ul>
 							<li>Travels service always queries to: flights, hotels, cars, insurances</li>
 							<li>Modify example to allow random queries (i.e. some users may not need a car)</li>
@@ -139,7 +142,7 @@ kubectl delete -f <(curl -L https://git.io/JeVtc)
 				</section>
 
 				<section>
-					<h3>[3.4.0] Advanced Tracing</h3>
+					<h3><a href="index.html">[3.4.0]</a> Advanced Tracing</h3>
 					<ul>
 						<li>Clone <a href="https://github.com/lucasponce/travel-comparison-demo" target="_blank">travel agency project</a> </li>
 						<li>Prepare your docker account</li>
