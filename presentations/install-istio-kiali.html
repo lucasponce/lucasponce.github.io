@@ -215,6 +215,22 @@ xdg-open ${JAEGER_URL}
 						</p>
 					</section>
 
+					<section>
+						<h3><a href="index.html">[Extra]</a> Minikube users only</h3>
+						<p>For <span class="my-red">demo</span> purposes we will use <span class="my-red">HTTP</span> instead <span class="my-green">HTTPS</span></p>
+						<pre class="bash"><code data-trim data-line-numbers="1-9">
+curl -L https://git.io/Je6op | kubectl apply -f -
+
+# Define variables
+export INGRESS_HOST=$(minikube ip)
+ 
+export KIALI_URL="http://${INGRESS_HOST}:31874/kiali"
+export PROMETHEUS_URL="http://${INGRESS_HOST}:32060/"
+export GRAFANA_URL="http://${INGRESS_HOST}:32611/"
+export JAEGER_URL="http://${INGRESS_HOST}:30498/jaeger"
+</code></pre>
+					</section>
+
 				</section>
 
 				<section>
