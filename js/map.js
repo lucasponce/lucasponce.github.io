@@ -136,11 +136,9 @@ function togglePeriod(period) {
     // Update mobile period indicator
     updateMobilePeriodIndicator();
     
-    // Reset map view if no periods are active or if we just activated a period
-    if (activePeriods.size === 0 || activePeriods.size === 4) {
-        map.setCenter({ lat: 40.4168, lng: -3.7038 });
-        map.setZoom(6);
-    }
+    // Always reset map view to initial position when any filter is toggled
+    map.setCenter({ lat: 40.4168, lng: -3.7038 });
+    map.setZoom(6);
 }
 
 function updateMobilePeriodIndicator() {
