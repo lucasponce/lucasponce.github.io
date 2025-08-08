@@ -190,6 +190,9 @@ function createMarker(siteData) {
     
     marker.addListener('click', function() {
         closeAllInfoWindows();
+        // Center and zoom to the clicked site
+        map.setCenter({ lat: siteData.lat, lng: siteData.lng });
+        map.setZoom(12);
         infoWindow.open(map, marker);
     });
     
