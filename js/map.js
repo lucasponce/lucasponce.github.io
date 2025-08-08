@@ -145,7 +145,6 @@ function initMap() {
     });
     
     loadArchaeologicalSites();
-    updateSitesList();
 }
 
 function loadArchaeologicalSites() {
@@ -204,49 +203,8 @@ function closeAllInfoWindows() {
     });
 }
 
-function updateSitesList() {
-    const sitesList = document.getElementById('sitesList');
-    
-    const romanSites = archaeologicalSites.filter(site => site.period === 'Roman');
-    const visigothSites = archaeologicalSites.filter(site => site.period === 'Visigothic');
-    const mixedSites = archaeologicalSites.filter(site => site.period === 'Roman-Visigothic');
-    const celtibrianSites = archaeologicalSites.filter(site => site.period === 'Celtiberian-Roman');
-    
-    sitesList.innerHTML = `
-        <div class="period-section">
-            <h4>🏛️ Roman Sites (${romanSites.length})</h4>
-            ${romanSites.map(site => createSiteListItem(site, '#8B4513')).join('')}
-        </div>
-        
-        <div class="period-section">
-            <h4>⛪ Visigothic Sites (${visigothSites.length})</h4>
-            ${visigothSites.map(site => createSiteListItem(site, '#800080')).join('')}
-        </div>
-        
-        <div class="period-section">
-            <h4>🏰 Roman-Visigothic Sites (${mixedSites.length})</h4>
-            ${mixedSites.map(site => createSiteListItem(site, '#4B0082')).join('')}
-        </div>
-        
-        <div class="period-section">
-            <h4>⚔️ Celtiberian-Roman Sites (${celtibrianSites.length})</h4>
-            ${celtibrianSites.map(site => createSiteListItem(site, '#CD853F')).join('')}
-        </div>
-    `;
-}
-
-function createSiteListItem(site, color) {
-    return `
-        <div class="site-item" onclick="focusOnSite(${site.lat}, ${site.lng}, ${site.id})">
-            <div class="site-marker" style="background-color: ${color}"></div>
-            <div class="site-info">
-                <div class="site-name">${site.name}</div>
-                <div class="site-location">${site.city}, ${site.province}</div>
-                <div class="site-description">${site.description}</div>
-            </div>
-        </div>
-    `;
-}
+// Track which periods are currently active
+let activePeriods = new Set(['Roman', 'Visigothic', 'Roman-Visigothic', 'Celtiberian-Roman']);
 
 function focusOnSite(lat, lng, siteId) {
     map.setCenter({ lat: lat, lng: lng });
@@ -260,19 +218,37 @@ function focusOnSite(lat, lng, siteId) {
     }
 }
 
-function filterSitesByPeriod(period) {
+function togglePeriod(period) {
     // Close all information windows
     closeAllInfoWindows();
     
-    // Reset map view to original position (showing all of Iberian Peninsula)
-    map.setCenter({ lat: 40.4168, lng: -3.7038 });
-    map.setZoom(6);
+    // Toggle the period in our active set
+    if (activePeriods.has(period)) {
+        activePeriods.delete(period);
+    } else {
+        activePeriods.add(period);
+    }
     
+    // Update button appearance
+    const button = document.querySelector(`[data-period="${period}"]`);
+    if (activePeriods.has(period)) {
+        button.classList.add('active');
+    } else {
+        button.classList.remove('active');
+    }
+    
+    // Update marker visibility
     markers.forEach(function(markerObj) {
-        if (period === 'all' || markerObj.data.period === period) {
+        if (activePeriods.has(markerObj.data.period)) {
             markerObj.marker.setVisible(true);
         } else {
             markerObj.marker.setVisible(false);
         }
     });
+    
+    // Reset map view if no periods are active or if we just activated a period
+    if (activePeriods.size === 0 || activePeriods.size === 4) {
+        map.setCenter({ lat: 40.4168, lng: -3.7038 });
+        map.setZoom(6);
+    }
 }
