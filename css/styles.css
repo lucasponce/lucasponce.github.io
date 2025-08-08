@@ -83,69 +83,33 @@ body::before {
 
 .main-container {
     position: relative;
-    height: calc(100vh - 120px);
+    height: calc(100vh - 180px);
     min-height: 500px;
-}
-
-.map-controls {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    z-index: 1000;
-    background: linear-gradient(135deg, rgba(26, 26, 26, 0.95) 0%, rgba(45, 27, 14, 0.95) 100%);
-    backdrop-filter: blur(15px);
-    border: 2px solid rgba(212, 175, 55, 0.4);
-    border-radius: 12px;
-    padding: 1.5rem;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-    max-width: 300px;
-    min-width: 280px;
-}
-
-.controls-header {
-    margin-bottom: 1.25rem;
-    text-align: center;
-}
-
-.controls-header h3 {
-    font-family: 'Cinzel', serif;
-    font-weight: 500;
-    color: #d4af37;
-    margin: 0 0 0.5rem 0;
-    font-size: 1.3rem;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-}
-
-.controls-header p {
-    font-family: 'Cormorant Garamond', serif;
-    color: #f4f1e8;
-    margin: 0;
-    font-size: 0.95rem;
-    opacity: 0.9;
-    font-style: italic;
 }
 
 .period-filters {
     display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
 }
 
 .period-button {
     display: flex;
     align-items: center;
-    padding: 0.875rem 1rem;
+    padding: 0.75rem 1.25rem;
     background: linear-gradient(135deg, rgba(26, 26, 26, 0.8) 0%, rgba(45, 27, 14, 0.8) 100%);
     border: 2px solid rgba(212, 175, 55, 0.3);
     border-radius: 8px;
     color: #f4f1e8;
     font-family: 'Cormorant Garamond', serif;
-    font-size: 1rem;
+    font-size: 0.95rem;
     cursor: pointer;
     transition: all 0.3s ease;
     min-height: 44px;
-    width: 100%;
-    text-align: left;
+    text-align: center;
+    white-space: nowrap;
     /* Touch feedback */
     -webkit-tap-highlight-color: rgba(212, 175, 55, 0.2);
 }
@@ -169,10 +133,10 @@ body::before {
 }
 
 .period-marker {
-    width: 16px;
-    height: 16px;
+    width: 14px;
+    height: 14px;
     border-radius: 50%;
-    margin-right: 0.875rem;
+    margin-right: 0.75rem;
     border: 2px solid rgba(255, 255, 255, 0.3);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     flex-shrink: 0;
@@ -244,9 +208,13 @@ body::before {
         font-size: 2.2rem;
     }
     
-    .map-controls {
-        max-width: 280px;
-        min-width: 260px;
+    .period-filters {
+        gap: 0.875rem;
+    }
+    
+    .period-button {
+        padding: 0.625rem 1rem;
+        font-size: 0.9rem;
     }
 }
 
@@ -256,57 +224,48 @@ body::before {
         font-size: 2rem;
     }
     
-    .map-controls {
-        top: 15px;
-        left: 15px;
-        padding: 1.25rem;
-        max-width: 260px;
-        min-width: 240px;
+    .main-container {
+        height: calc(100vh - 160px);
     }
     
-    .controls-header h3 {
-        font-size: 1.2rem;
+    .period-filters {
+        gap: 0.75rem;
+        margin-top: 1.25rem;
     }
     
     .period-button {
-        padding: 0.75rem 0.875rem;
-        font-size: 0.95rem;
+        padding: 0.625rem 1rem;
+        font-size: 0.9rem;
     }
     
     .period-marker {
-        width: 14px;
-        height: 14px;
-        margin-right: 0.75rem;
+        width: 12px;
+        height: 12px;
+        margin-right: 0.625rem;
     }
 }
 
 /* Mobile landscape */
 @media (max-width: 768px) and (orientation: landscape) {
-    .map-controls {
-        top: 10px;
-        left: 10px;
-        padding: 1rem;
-        max-width: 220px;
-        min-width: 200px;
-    }
-    
-    .controls-header h3 {
-        font-size: 1.1rem;
-        margin-bottom: 0.375rem;
-    }
-    
-    .controls-header p {
-        font-size: 0.875rem;
+    .main-container {
+        height: calc(100vh - 140px);
     }
     
     .period-filters {
         gap: 0.5rem;
+        margin-top: 1rem;
     }
     
     .period-button {
-        padding: 0.625rem 0.75rem;
-        font-size: 0.9rem;
+        padding: 0.5rem 0.875rem;
+        font-size: 0.85rem;
         min-height: 40px;
+    }
+    
+    .period-marker {
+        width: 10px;
+        height: 10px;
+        margin-right: 0.5rem;
     }
 }
 
@@ -334,41 +293,29 @@ body::before {
     }
     
     .main-container {
-        height: calc(100vh - 100px);
+        height: calc(100vh - 140px);
         min-height: 400px;
-    }
-    
-    .map-controls {
-        top: 10px;
-        left: 10px;
-        padding: 1rem;
-        max-width: 240px;
-        min-width: 220px;
-    }
-    
-    .controls-header h3 {
-        font-size: 1.1rem;
-        margin-bottom: 0.375rem;
-    }
-    
-    .controls-header p {
-        font-size: 0.85rem;
     }
     
     .period-filters {
         gap: 0.5rem;
+        margin-top: 1rem;
+        flex-direction: column;
+        align-items: center;
     }
     
     .period-button {
-        padding: 0.625rem 0.75rem;
-        font-size: 0.9rem;
-        min-height: 42px;
+        padding: 0.5rem 0.875rem;
+        font-size: 0.85rem;
+        min-height: 40px;
+        width: auto;
+        max-width: 200px;
     }
     
     .period-marker {
-        width: 12px;
-        height: 12px;
-        margin-right: 0.625rem;
+        width: 10px;
+        height: 10px;
+        margin-right: 0.5rem;
     }
 }
 
@@ -382,33 +329,17 @@ body::before {
         font-size: 0.95rem;
     }
     
-    .map-controls {
-        top: 8px;
-        left: 8px;
-        padding: 0.875rem;
-        max-width: 200px;
-        min-width: 180px;
-    }
-    
-    .controls-header h3 {
-        font-size: 1rem;
-        margin-bottom: 0.25rem;
-    }
-    
-    .controls-header p {
-        font-size: 0.8rem;
-    }
-    
     .period-button {
-        padding: 0.5rem 0.625rem;
-        font-size: 0.85rem;
-        min-height: 40px;
+        padding: 0.4rem 0.75rem;
+        font-size: 0.8rem;
+        min-height: 38px;
+        max-width: 180px;
     }
     
     .period-marker {
-        width: 10px;
-        height: 10px;
-        margin-right: 0.5rem;
+        width: 8px;
+        height: 8px;
+        margin-right: 0.4rem;
     }
 }
 
@@ -422,31 +353,21 @@ body::before {
         font-size: 1.375rem;
     }
     
-    .map-controls {
-        top: 5px;
-        left: 5px;
-        padding: 0.75rem;
-        max-width: 180px;
-        min-width: 160px;
-    }
-    
-    .controls-header h3 {
-        font-size: 0.95rem;
-    }
-    
-    .controls-header p {
-        font-size: 0.75rem;
-        margin-bottom: 0.75rem;
-    }
-    
     .period-button {
-        padding: 0.4rem 0.5rem;
-        font-size: 0.8rem;
-        min-height: 38px;
+        padding: 0.35rem 0.625rem;
+        font-size: 0.75rem;
+        min-height: 36px;
+        max-width: 150px;
     }
     
     .period-button span {
-        font-size: 0.8rem;
+        font-size: 0.75rem;
+    }
+    
+    .period-marker {
+        width: 6px;
+        height: 6px;
+        margin-right: 0.3rem;
     }
 }
 
@@ -474,10 +395,6 @@ button, input, select, textarea {
 @media (prefers-contrast: high) {
     .header {
         border-bottom-width: 4px;
-    }
-    
-    .map-controls {
-        border-width: 3px;
     }
     
     .period-button {
