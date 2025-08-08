@@ -1,7 +1,141 @@
 let map;
 let markers = [];
-let addMode = false;
 let infoWindows = [];
+
+const archaeologicalSites = [
+    {
+        id: 1,
+        name: "Augusta Emerita",
+        city: "Mérida",
+        province: "Badajoz",
+        lat: 38.9166,
+        lng: -6.3333,
+        period: "Romano",
+        description: "Capital de Lusitania romana. Conserva teatro, anfiteatro, circo, templo de Diana, acueductos y puente romano. Patrimonio de la Humanidad UNESCO.",
+        wikipediaUrl: "https://es.wikipedia.org/wiki/M%C3%A9rida_(Espa%C3%B1a)"
+    },
+    {
+        id: 2,
+        name: "Tarraco",
+        city: "Tarragona",
+        province: "Tarragona",
+        lat: 41.1189,
+        lng: 1.2445,
+        period: "Romano",
+        description: "Capital de Hispania Citerior. Conserva muralla romana, anfiteatro, circo, foro provincial y acueducto. Patrimonio de la Humanidad UNESCO.",
+        wikipediaUrl: "https://es.wikipedia.org/wiki/Tarragona"
+    },
+    {
+        id: 3,
+        name: "Segóbriga",
+        city: "Saelices",
+        province: "Cuenca",
+        lat: 39.8851,
+        lng: -2.8133,
+        period: "Romano",
+        description: "Antigua 'caput Celtiberiæ'. Conserva teatro, anfiteatro, termas, muralla y foro. Prosperó por la explotación del lapis specularis.",
+        wikipediaUrl: "https://es.wikipedia.org/wiki/Segobriga"
+    },
+    {
+        id: 4,
+        name: "Corduba",
+        city: "Córdoba",
+        province: "Córdoba",
+        lat: 37.8882,
+        lng: -4.7794,
+        period: "Romano",
+        description: "Capital de Hispania Ulterior Baetica. Conserva el famoso puente romano sobre el Guadalquivir, ejemplo de la durabilidad de las obras civiles romanas.",
+        wikipediaUrl: "https://es.wikipedia.org/wiki/C%C3%B3rdoba_(Espa%C3%B1a)"
+    },
+    {
+        id: 5,
+        name: "Empúries",
+        city: "L'Escala",
+        province: "Girona",
+        lat: 42.1364,
+        lng: 3.1206,
+        period: "Romano",
+        description: "Punto de entrada de la invasión romana en 218 a.C. Conserva restos de la ciudad griega y romana, incluyendo muralla romana.",
+        wikipediaUrl: "https://es.wikipedia.org/wiki/Emp%C3%BAries"
+    },
+    {
+        id: 6,
+        name: "Baelo Claudia",
+        city: "Tarifa",
+        province: "Cádiz",
+        lat: 36.0886,
+        lng: -5.7708,
+        period: "Romano",
+        description: "Ciudad romana costera que conserva basílica, teatro, templos y factoría de salazones. Muestra influencia del modo de construir africano.",
+        wikipediaUrl: "https://es.wikipedia.org/wiki/Baelo_Claudia"
+    },
+    {
+        id: 7,
+        name: "Numancia",
+        city: "Garray",
+        province: "Soria",
+        lat: 41.7833,
+        lng: -2.4456,
+        period: "Celtíbero-Romano",
+        description: "Famosa ciudad celtíbera que resistió heroicamente el asedio romano hasta el 133 a.C. Símbolo de la resistencia indígena.",
+        wikipediaUrl: "https://es.wikipedia.org/wiki/Numancia"
+    },
+    {
+        id: 8,
+        name: "Caesaraugusta",
+        city: "Zaragoza",
+        province: "Zaragoza",
+        lat: 41.6561,
+        lng: -0.8773,
+        period: "Romano",
+        description: "Importante ciudad romana fundada por Augusto. Conserva teatro, termas, foro y museo del puerto fluvial romano.",
+        wikipediaUrl: "https://es.wikipedia.org/wiki/Zaragoza"
+    },
+    {
+        id: 9,
+        name: "Toledo (Toletum)",
+        city: "Toledo",
+        province: "Toledo",
+        lat: 39.8628,
+        lng: -4.0273,
+        period: "Romano-Visigodo",
+        description: "Capital del Reino Visigodo de Toledo (567-712). Conserva restos romanos y visigodos, incluyendo iglesias con arquitectura de arco de herradura.",
+        wikipediaUrl: "https://es.wikipedia.org/wiki/Toledo"
+    },
+    {
+        id: 10,
+        name: "Astorga (Asturica Augusta)",
+        city: "Astorga",
+        province: "León",
+        lat: 42.4579,
+        lng: -6.0545,
+        period: "Romano",
+        description: "Importante ciudad romana en el noroeste. Conserva termas, muralla romana y fue centro de explotación aurífera de Las Médulas.",
+        wikipediaUrl: "https://es.wikipedia.org/wiki/Astorga"
+    },
+    {
+        id: 11,
+        name: "San Juan de Baños",
+        city: "Baños de Cerrato",
+        province: "Palencia",
+        lat: 41.9167,
+        lng: -4.3167,
+        period: "Visigodo",
+        description: "Iglesia visigoda del siglo VII. Ejemplo destacado de arquitectura visigoda con planta basilical, muros gruesos y arco de herradura.",
+        wikipediaUrl: "https://es.wikipedia.org/wiki/Iglesia_de_San_Juan_de_Ba%C3%B1os"
+    },
+    {
+        id: 12,
+        name: "Lugo (Lucus Augusti)",
+        city: "Lugo",
+        province: "Lugo",
+        lat: 43.0130,
+        lng: -7.5564,
+        period: "Romano",
+        description: "Conserva la muralla romana mejor preservada del mundo, declarada Patrimonio de la Humanidad. Completa y transitable.",
+        wikipediaUrl: "https://es.wikipedia.org/wiki/Lugo"
+    }
+];
 
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
@@ -10,67 +144,30 @@ function initMap() {
         mapTypeId: 'roadmap'
     });
     
-    map.addListener('click', function(event) {
-        if (addMode) {
-            addPointOfInterest(event.latLng);
-        }
+    loadArchaeologicalSites();
+    updateSitesList();
+}
+
+function loadArchaeologicalSites() {
+    archaeologicalSites.forEach(function(site) {
+        createMarker(site);
     });
-    
-    loadSavedPoints();
 }
 
-function enableAddMode() {
-    const name = document.getElementById('pointName').value.trim();
-    const description = document.getElementById('pointDescription').value.trim();
+function createMarker(siteData) {
+    const iconColor = siteData.period === 'Romano' ? '#8B4513' : 
+                     siteData.period === 'Visigodo' ? '#800080' : 
+                     siteData.period === 'Romano-Visigodo' ? '#4B0082' : 
+                     '#CD853F';
     
-    if (!name) {
-        alert('Por favor, introduce un nombre para el punto de interés');
-        return;
-    }
-    
-    addMode = true;
-    document.body.style.cursor = 'crosshair';
-    alert('Haz clic en el mapa donde quieras añadir el punto de interés');
-}
-
-function addPointOfInterest(location) {
-    const name = document.getElementById('pointName').value.trim();
-    const description = document.getElementById('pointDescription').value.trim();
-    
-    if (!name) {
-        alert('Por favor, introduce un nombre para el punto de interés');
-        addMode = false;
-        document.body.style.cursor = 'default';
-        return;
-    }
-    
-    const pointData = {
-        id: Date.now(),
-        lat: location.lat(),
-        lng: location.lng(),
-        name: name,
-        description: description
-    };
-    
-    createMarker(pointData);
-    savePoint(pointData);
-    updatePointsList();
-    
-    document.getElementById('pointName').value = '';
-    document.getElementById('pointDescription').value = '';
-    addMode = false;
-    document.body.style.cursor = 'default';
-}
-
-function createMarker(pointData) {
     const marker = new google.maps.Marker({
-        position: { lat: pointData.lat, lng: pointData.lng },
+        position: { lat: siteData.lat, lng: siteData.lng },
         map: map,
-        title: pointData.name,
+        title: siteData.name,
         icon: {
             url: 'data:image/svg+xml;base64,' + btoa(`
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="36" viewBox="0 0 24 36">
-                    <path fill="#e74c3c" d="M12 0C5.4 0 0 5.4 0 12s12 24 12 24 12-17.6 12-24S18.6 0 12 0z"/>
+                    <path fill="${iconColor}" d="M12 0C5.4 0 0 5.4 0 12s12 24 12 24 12-17.6 12-24S18.6 0 12 0z"/>
                     <circle fill="white" cx="12" cy="12" r="6"/>
                 </svg>
             `),
@@ -82,10 +179,12 @@ function createMarker(pointData) {
     const infoWindow = new google.maps.InfoWindow({
         content: `
             <div class="info-window">
-                <h3>${pointData.name}</h3>
-                <p><strong>Descripción:</strong> ${pointData.description || 'Sin descripción'}</p>
-                <p><strong>Coordenadas:</strong> ${pointData.lat.toFixed(6)}, ${pointData.lng.toFixed(6)}</p>
-                <button class="delete-btn" onclick="deletePoint(${pointData.id})">Eliminar Punto</button>
+                <h3>${siteData.name}</h3>
+                <p><strong>Ubicación:</strong> ${siteData.city}, ${siteData.province}</p>
+                <p><strong>Período:</strong> ${siteData.period}</p>
+                <p><strong>Descripción:</strong> ${siteData.description}</p>
+                <p><strong>Coordenadas:</strong> ${siteData.lat.toFixed(4)}, ${siteData.lng.toFixed(4)}</p>
+                <p><a href="${siteData.wikipediaUrl}" target="_blank" rel="noopener noreferrer">📖 Ver en Wikipedia</a></p>
             </div>
         `
     });
@@ -95,7 +194,7 @@ function createMarker(pointData) {
         infoWindow.open(map, marker);
     });
     
-    markers.push({ marker: marker, infoWindow: infoWindow, data: pointData });
+    markers.push({ marker: marker, infoWindow: infoWindow, data: siteData });
     infoWindows.push(infoWindow);
 }
 
@@ -105,69 +204,72 @@ function closeAllInfoWindows() {
     });
 }
 
-function deletePoint(pointId) {
-    const markerIndex = markers.findIndex(m => m.data.id === pointId);
-    if (markerIndex !== -1) {
-        markers[markerIndex].marker.setMap(null);
-        markers[markerIndex].infoWindow.close();
-        markers.splice(markerIndex, 1);
-    }
+function updateSitesList() {
+    const sitesList = document.getElementById('sitesList');
     
-    const savedPoints = JSON.parse(localStorage.getItem('mapPoints') || '[]');
-    const filteredPoints = savedPoints.filter(point => point.id !== pointId);
-    localStorage.setItem('mapPoints', JSON.stringify(filteredPoints));
+    const romanSites = archaeologicalSites.filter(site => site.period === 'Romano');
+    const visigothSites = archaeologicalSites.filter(site => site.period === 'Visigodo');
+    const mixedSites = archaeologicalSites.filter(site => site.period === 'Romano-Visigodo');
+    const celtibrianSites = archaeologicalSites.filter(site => site.period === 'Celtíbero-Romano');
     
-    updatePointsList();
-}
-
-function savePoint(pointData) {
-    const savedPoints = JSON.parse(localStorage.getItem('mapPoints') || '[]');
-    savedPoints.push(pointData);
-    localStorage.setItem('mapPoints', JSON.stringify(savedPoints));
-}
-
-function loadSavedPoints() {
-    const savedPoints = JSON.parse(localStorage.getItem('mapPoints') || '[]');
-    savedPoints.forEach(function(pointData) {
-        createMarker(pointData);
-    });
-    updatePointsList();
-}
-
-function updatePointsList() {
-    const savedPoints = JSON.parse(localStorage.getItem('mapPoints') || '[]');
-    const pointsList = document.getElementById('pointsList');
-    
-    if (savedPoints.length === 0) {
-        pointsList.innerHTML = '<p>No hay puntos de interés guardados.</p>';
-        return;
-    }
-    
-    pointsList.innerHTML = savedPoints.map(point => `
-        <div class="point-item">
-            <div class="point-info">
-                <div class="point-name">${point.name}</div>
-                <div class="point-description">${point.description || 'Sin descripción'}</div>
-            </div>
-            <button class="btn btn-danger" onclick="deletePoint(${point.id})">Eliminar</button>
+    sitesList.innerHTML = `
+        <div class="period-section">
+            <h4>🏛️ Yacimientos Romanos (${romanSites.length})</h4>
+            ${romanSites.map(site => createSiteListItem(site, '#8B4513')).join('')}
         </div>
-    `).join('');
+        
+        <div class="period-section">
+            <h4>⛪ Yacimientos Visigodos (${visigothSites.length})</h4>
+            ${visigothSites.map(site => createSiteListItem(site, '#800080')).join('')}
+        </div>
+        
+        <div class="period-section">
+            <h4>🏰 Yacimientos Romano-Visigodos (${mixedSites.length})</h4>
+            ${mixedSites.map(site => createSiteListItem(site, '#4B0082')).join('')}
+        </div>
+        
+        <div class="period-section">
+            <h4>⚔️ Yacimientos Celtíbero-Romanos (${celtibrianSites.length})</h4>
+            ${celtibrianSites.map(site => createSiteListItem(site, '#CD853F')).join('')}
+        </div>
+    `;
 }
 
-function clearAllPoints() {
-    if (confirm('¿Estás seguro de que quieres eliminar todos los puntos de interés?')) {
-        markers.forEach(function(markerObj) {
-            markerObj.marker.setMap(null);
-            markerObj.infoWindow.close();
-        });
-        markers = [];
-        infoWindows = [];
-        localStorage.removeItem('mapPoints');
-        updatePointsList();
-    }
+function createSiteListItem(site, color) {
+    return `
+        <div class="site-item" onclick="focusOnSite(${site.lat}, ${site.lng}, ${site.id})">
+            <div class="site-marker" style="background-color: ${color}"></div>
+            <div class="site-info">
+                <div class="site-name">${site.name}</div>
+                <div class="site-location">${site.city}, ${site.province}</div>
+                <div class="site-description">${site.description}</div>
+            </div>
+        </div>
+    `;
 }
 
-function focusOnPoint(lat, lng) {
+function focusOnSite(lat, lng, siteId) {
     map.setCenter({ lat: lat, lng: lng });
     map.setZoom(12);
+    
+    // Encontrar y abrir la ventana de información del sitio
+    const markerObj = markers.find(m => m.data.id === siteId);
+    if (markerObj) {
+        closeAllInfoWindows();
+        markerObj.infoWindow.open(map, markerObj.marker);
+    }
+}
+
+function filterSitesByPeriod(period) {
+    // Cerrar todas las ventanas de información
+    closeAllInfoWindows();
+    
+    markers.forEach(function(markerObj) {
+        if (period === 'all' || markerObj.data.period === period || 
+            (period === 'Romano-Visigodo' && markerObj.data.period.includes('Romano'))) {
+            markerObj.marker.setVisible(true);
+        } else {
+            markerObj.marker.setVisible(false);
+        }
+    });
 }
