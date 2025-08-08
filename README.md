@@ -1,1 +1,1 @@
-# lucasponce.github.io
+# Static web pages experiments with AI
