@@ -145,6 +145,7 @@ function initMap() {
     });
     
     loadArchaeologicalSites();
+    updateMobilePeriodIndicator();
 }
 
 function loadArchaeologicalSites() {
@@ -249,9 +250,43 @@ function togglePeriod(period) {
         }
     });
     
+    // Update mobile period indicator
+    updateMobilePeriodIndicator();
+    
     // Reset map view if no periods are active or if we just activated a period
     if (activePeriods.size === 0 || activePeriods.size === 4) {
         map.setCenter({ lat: 40.4168, lng: -3.7038 });
         map.setZoom(6);
+    }
+}
+
+function updateMobilePeriodIndicator() {
+    const indicatorList = document.getElementById('activePeriodsList');
+    if (!indicatorList) return;
+    
+    // Clear current content
+    indicatorList.innerHTML = '';
+    
+    // Period colors mapping
+    const periodColors = {
+        'Roman': '#8B4513',
+        'Visigothic': '#800080',
+        'Roman-Visigothic': '#4B0082',
+        'Celtiberian-Roman': '#CD853F'
+    };
+    
+    // Create items for active periods
+    if (activePeriods.size === 0) {
+        indicatorList.innerHTML = '<div class="period-indicator-item">No periods active</div>';
+    } else {
+        activePeriods.forEach(period => {
+            const item = document.createElement('div');
+            item.className = 'period-indicator-item';
+            item.innerHTML = `
+                <div class="period-indicator-marker" style="background-color: ${periodColors[period]};"></div>
+                <span>${period}</span>
+            `;
+            indicatorList.appendChild(item);
+        });
     }
 }
