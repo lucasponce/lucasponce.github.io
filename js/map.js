@@ -40,7 +40,6 @@ function loadArchaeologicalSites() {
 function createMarker(siteData) {
     const iconColor = siteData.period === 'Roman' ? '#8B4513' : 
                      siteData.period === 'Visigothic' ? '#800080' : 
-                     siteData.period === 'Roman-Visigothic' ? '#4B0082' : 
                      '#CD853F';
     
     const marker = new google.maps.Marker({
@@ -91,7 +90,7 @@ function closeAllInfoWindows() {
 }
 
 // Track which periods are currently active
-let activePeriods = new Set(['Roman', 'Visigothic', 'Roman-Visigothic', 'Celtiberian-Roman']);
+let activePeriods = new Set(['Roman', 'Visigothic', 'Celtiberian-Roman']);
 
 function focusOnSite(lat, lng, siteId) {
     map.setCenter({ lat: lat, lng: lng });
@@ -152,7 +151,6 @@ function updateMobilePeriodIndicator() {
     const periodColors = {
         'Roman': '#8B4513',
         'Visigothic': '#800080',
-        'Roman-Visigothic': '#4B0082',
         'Celtiberian-Roman': '#CD853F'
     };
     
