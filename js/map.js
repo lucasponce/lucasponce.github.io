@@ -10,9 +10,9 @@ const archaeologicalSites = [
         province: "Badajoz",
         lat: 38.9166,
         lng: -6.3333,
-        period: "Romano",
-        description: "Capital de Lusitania romana. Conserva teatro, anfiteatro, circo, templo de Diana, acueductos y puente romano. Patrimonio de la Humanidad UNESCO.",
-        wikipediaUrl: "https://es.wikipedia.org/wiki/M%C3%A9rida_(Espa%C3%B1a)"
+        period: "Roman",
+        description: "Capital of Roman Lusitania. Preserves theater, amphitheater, circus, Temple of Diana, aqueducts and Roman bridge. UNESCO World Heritage Site.",
+        wikipediaUrl: "https://en.wikipedia.org/wiki/M%C3%A9rida,_Spain"
     },
     {
         id: 2,
@@ -21,9 +21,9 @@ const archaeologicalSites = [
         province: "Tarragona",
         lat: 41.1189,
         lng: 1.2445,
-        period: "Romano",
-        description: "Capital de Hispania Citerior. Conserva muralla romana, anfiteatro, circo, foro provincial y acueducto. Patrimonio de la Humanidad UNESCO.",
-        wikipediaUrl: "https://es.wikipedia.org/wiki/Tarragona"
+        period: "Roman",
+        description: "Capital of Hispania Citerior. Preserves Roman walls, amphitheater, circus, provincial forum and aqueduct. UNESCO World Heritage Site.",
+        wikipediaUrl: "https://en.wikipedia.org/wiki/Tarragona"
     },
     {
         id: 3,
@@ -32,9 +32,9 @@ const archaeologicalSites = [
         province: "Cuenca",
         lat: 39.8851,
         lng: -2.8133,
-        period: "Romano",
-        description: "Antigua 'caput Celtiberiæ'. Conserva teatro, anfiteatro, termas, muralla y foro. Prosperó por la explotación del lapis specularis.",
-        wikipediaUrl: "https://es.wikipedia.org/wiki/Segobriga"
+        period: "Roman",
+        description: "Ancient 'caput Celtiberiæ' (head of Celtiberia). Preserves theater, amphitheater, baths, walls and forum. Prospered from lapis specularis exploitation.",
+        wikipediaUrl: "https://en.wikipedia.org/wiki/Segobriga"
     },
     {
         id: 4,
@@ -43,9 +43,9 @@ const archaeologicalSites = [
         province: "Córdoba",
         lat: 37.8882,
         lng: -4.7794,
-        period: "Romano",
-        description: "Capital de Hispania Ulterior Baetica. Conserva el famoso puente romano sobre el Guadalquivir, ejemplo de la durabilidad de las obras civiles romanas.",
-        wikipediaUrl: "https://es.wikipedia.org/wiki/C%C3%B3rdoba_(Espa%C3%B1a)"
+        period: "Roman",
+        description: "Capital of Hispania Ulterior Baetica. Preserves the famous Roman bridge over the Guadalquivir, an example of the durability of Roman civil works.",
+        wikipediaUrl: "https://en.wikipedia.org/wiki/C%C3%B3rdoba,_Spain"
     },
     {
         id: 5,
@@ -54,9 +54,9 @@ const archaeologicalSites = [
         province: "Girona",
         lat: 42.1364,
         lng: 3.1206,
-        period: "Romano",
-        description: "Punto de entrada de la invasión romana en 218 a.C. Conserva restos de la ciudad griega y romana, incluyendo muralla romana.",
-        wikipediaUrl: "https://es.wikipedia.org/wiki/Emp%C3%BAries"
+        period: "Roman",
+        description: "Entry point of the Roman invasion in 218 BC. Preserves remains of the Greek and Roman city, including Roman walls.",
+        wikipediaUrl: "https://en.wikipedia.org/wiki/Emp%C3%BAries"
     },
     {
         id: 6,
@@ -65,9 +65,9 @@ const archaeologicalSites = [
         province: "Cádiz",
         lat: 36.0886,
         lng: -5.7708,
-        period: "Romano",
-        description: "Ciudad romana costera que conserva basílica, teatro, templos y factoría de salazones. Muestra influencia del modo de construir africano.",
-        wikipediaUrl: "https://es.wikipedia.org/wiki/Baelo_Claudia"
+        period: "Roman",
+        description: "Coastal Roman city that preserves basilica, theater, temples and fish-salting factory. Shows influence of African building methods.",
+        wikipediaUrl: "https://en.wikipedia.org/wiki/Baelo_Claudia"
     },
     {
         id: 7,
@@ -76,9 +76,9 @@ const archaeologicalSites = [
         province: "Soria",
         lat: 41.7833,
         lng: -2.4456,
-        period: "Celtíbero-Romano",
-        description: "Famosa ciudad celtíbera que resistió heroicamente el asedio romano hasta el 133 a.C. Símbolo de la resistencia indígena.",
-        wikipediaUrl: "https://es.wikipedia.org/wiki/Numancia"
+        period: "Celtiberian-Roman",
+        description: "Famous Celtiberian city that heroically resisted the Roman siege until 133 BC. Symbol of indigenous resistance.",
+        wikipediaUrl: "https://en.wikipedia.org/wiki/Numantia"
     },
     {
         id: 8,
@@ -87,9 +87,9 @@ const archaeologicalSites = [
         province: "Zaragoza",
         lat: 41.6561,
         lng: -0.8773,
-        period: "Romano",
-        description: "Importante ciudad romana fundada por Augusto. Conserva teatro, termas, foro y museo del puerto fluvial romano.",
-        wikipediaUrl: "https://es.wikipedia.org/wiki/Zaragoza"
+        period: "Roman",
+        description: "Important Roman city founded by Augustus. Preserves theater, baths, forum and museum of the Roman river port.",
+        wikipediaUrl: "https://en.wikipedia.org/wiki/Zaragoza"
     },
     {
         id: 9,
@@ -98,9 +98,9 @@ const archaeologicalSites = [
         province: "Toledo",
         lat: 39.8628,
         lng: -4.0273,
-        period: "Romano-Visigodo",
-        description: "Capital del Reino Visigodo de Toledo (567-712). Conserva restos romanos y visigodos, incluyendo iglesias con arquitectura de arco de herradura.",
-        wikipediaUrl: "https://es.wikipedia.org/wiki/Toledo"
+        period: "Roman-Visigothic",
+        description: "Capital of the Visigothic Kingdom of Toledo (567-712). Preserves Roman and Visigothic remains, including churches with horseshoe arch architecture.",
+        wikipediaUrl: "https://en.wikipedia.org/wiki/Toledo,_Spain"
     },
     {
         id: 10,
@@ -109,9 +109,9 @@ const archaeologicalSites = [
         province: "León",
         lat: 42.4579,
         lng: -6.0545,
-        period: "Romano",
-        description: "Importante ciudad romana en el noroeste. Conserva termas, muralla romana y fue centro de explotación aurífera de Las Médulas.",
-        wikipediaUrl: "https://es.wikipedia.org/wiki/Astorga"
+        period: "Roman",
+        description: "Important Roman city in the northwest. Preserves baths, Roman walls and was center of gold exploitation at Las Médulas.",
+        wikipediaUrl: "https://en.wikipedia.org/wiki/Astorga,_Spain"
     },
     {
         id: 11,
@@ -120,9 +120,9 @@ const archaeologicalSites = [
         province: "Palencia",
         lat: 41.9167,
         lng: -4.3167,
-        period: "Visigodo",
-        description: "Iglesia visigoda del siglo VII. Ejemplo destacado de arquitectura visigoda con planta basilical, muros gruesos y arco de herradura.",
-        wikipediaUrl: "https://es.wikipedia.org/wiki/Iglesia_de_San_Juan_de_Ba%C3%B1os"
+        period: "Visigothic",
+        description: "7th-century Visigothic church. Outstanding example of Visigothic architecture with basilical plan, thick walls and horseshoe arch.",
+        wikipediaUrl: "https://en.wikipedia.org/wiki/Basilica_of_San_Juan_Bautista"
     },
     {
         id: 12,
@@ -131,9 +131,9 @@ const archaeologicalSites = [
         province: "Lugo",
         lat: 43.0130,
         lng: -7.5564,
-        period: "Romano",
-        description: "Conserva la muralla romana mejor preservada del mundo, declarada Patrimonio de la Humanidad. Completa y transitable.",
-        wikipediaUrl: "https://es.wikipedia.org/wiki/Lugo"
+        period: "Roman",
+        description: "Preserves the best-preserved Roman wall in the world, declared World Heritage Site. Complete and walkable.",
+        wikipediaUrl: "https://en.wikipedia.org/wiki/Lugo"
     }
 ];
 
@@ -155,9 +155,9 @@ function loadArchaeologicalSites() {
 }
 
 function createMarker(siteData) {
-    const iconColor = siteData.period === 'Romano' ? '#8B4513' : 
-                     siteData.period === 'Visigodo' ? '#800080' : 
-                     siteData.period === 'Romano-Visigodo' ? '#4B0082' : 
+    const iconColor = siteData.period === 'Roman' ? '#8B4513' : 
+                     siteData.period === 'Visigothic' ? '#800080' : 
+                     siteData.period === 'Roman-Visigothic' ? '#4B0082' : 
                      '#CD853F';
     
     const marker = new google.maps.Marker({
@@ -180,11 +180,11 @@ function createMarker(siteData) {
         content: `
             <div class="info-window">
                 <h3>${siteData.name}</h3>
-                <p><strong>Ubicación:</strong> ${siteData.city}, ${siteData.province}</p>
-                <p><strong>Período:</strong> ${siteData.period}</p>
-                <p><strong>Descripción:</strong> ${siteData.description}</p>
-                <p><strong>Coordenadas:</strong> ${siteData.lat.toFixed(4)}, ${siteData.lng.toFixed(4)}</p>
-                <p><a href="${siteData.wikipediaUrl}" target="_blank" rel="noopener noreferrer">📖 Ver en Wikipedia</a></p>
+                <p><strong>Location:</strong> ${siteData.city}, ${siteData.province}</p>
+                <p><strong>Period:</strong> ${siteData.period}</p>
+                <p><strong>Description:</strong> ${siteData.description}</p>
+                <p><strong>Coordinates:</strong> ${siteData.lat.toFixed(4)}, ${siteData.lng.toFixed(4)}</p>
+                <p><a href="${siteData.wikipediaUrl}" target="_blank" rel="noopener noreferrer">📖 View on Wikipedia</a></p>
             </div>
         `
     });
@@ -207,29 +207,29 @@ function closeAllInfoWindows() {
 function updateSitesList() {
     const sitesList = document.getElementById('sitesList');
     
-    const romanSites = archaeologicalSites.filter(site => site.period === 'Romano');
-    const visigothSites = archaeologicalSites.filter(site => site.period === 'Visigodo');
-    const mixedSites = archaeologicalSites.filter(site => site.period === 'Romano-Visigodo');
-    const celtibrianSites = archaeologicalSites.filter(site => site.period === 'Celtíbero-Romano');
+    const romanSites = archaeologicalSites.filter(site => site.period === 'Roman');
+    const visigothSites = archaeologicalSites.filter(site => site.period === 'Visigothic');
+    const mixedSites = archaeologicalSites.filter(site => site.period === 'Roman-Visigothic');
+    const celtibrianSites = archaeologicalSites.filter(site => site.period === 'Celtiberian-Roman');
     
     sitesList.innerHTML = `
         <div class="period-section">
-            <h4>🏛️ Yacimientos Romanos (${romanSites.length})</h4>
+            <h4>🏛️ Roman Sites (${romanSites.length})</h4>
             ${romanSites.map(site => createSiteListItem(site, '#8B4513')).join('')}
         </div>
         
         <div class="period-section">
-            <h4>⛪ Yacimientos Visigodos (${visigothSites.length})</h4>
+            <h4>⛪ Visigothic Sites (${visigothSites.length})</h4>
             ${visigothSites.map(site => createSiteListItem(site, '#800080')).join('')}
         </div>
         
         <div class="period-section">
-            <h4>🏰 Yacimientos Romano-Visigodos (${mixedSites.length})</h4>
+            <h4>🏰 Roman-Visigothic Sites (${mixedSites.length})</h4>
             ${mixedSites.map(site => createSiteListItem(site, '#4B0082')).join('')}
         </div>
         
         <div class="period-section">
-            <h4>⚔️ Yacimientos Celtíbero-Romanos (${celtibrianSites.length})</h4>
+            <h4>⚔️ Celtiberian-Roman Sites (${celtibrianSites.length})</h4>
             ${celtibrianSites.map(site => createSiteListItem(site, '#CD853F')).join('')}
         </div>
     `;
@@ -252,7 +252,7 @@ function focusOnSite(lat, lng, siteId) {
     map.setCenter({ lat: lat, lng: lng });
     map.setZoom(12);
     
-    // Encontrar y abrir la ventana de información del sitio
+    // Find and open the site's information window
     const markerObj = markers.find(m => m.data.id === siteId);
     if (markerObj) {
         closeAllInfoWindows();
@@ -261,12 +261,11 @@ function focusOnSite(lat, lng, siteId) {
 }
 
 function filterSitesByPeriod(period) {
-    // Cerrar todas las ventanas de información
+    // Close all information windows
     closeAllInfoWindows();
     
     markers.forEach(function(markerObj) {
-        if (period === 'all' || markerObj.data.period === period || 
-            (period === 'Romano-Visigodo' && markerObj.data.period.includes('Romano'))) {
+        if (period === 'all' || markerObj.data.period === period) {
             markerObj.marker.setVisible(true);
         } else {
             markerObj.marker.setVisible(false);

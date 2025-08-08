@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-        <title>Mapa Interactivo de España</title>
+        <title>Roman and Visigothic Archaeological Sites of Spain</title>
         <style>
             body {
                 margin: 0;
@@ -189,38 +189,38 @@
     </head>
     <body>
         <div class="header">
-            <h1>Yacimientos Arqueológicos Romanos y Visigodos de España</h1>
-            <p>Explora los principales sitios arqueológicos de las épocas romana y visigoda en la Península Ibérica</p>
+            <h1>Roman and Visigothic Archaeological Sites of Spain</h1>
+            <p>Explore the main archaeological sites from the Roman and Visigothic periods in the Iberian Peninsula</p>
         </div>
         
         <div class="controls">
             <div class="control-group">
-                <label for="periodFilter">Filtrar por período:</label>
+                <label for="periodFilter">Filter by period:</label>
                 <select id="periodFilter" onchange="filterSitesByPeriod(this.value)">
-                    <option value="all">Todos los períodos</option>
-                    <option value="Romano">Romano</option>
-                    <option value="Visigodo">Visigodo</option>
-                    <option value="Romano-Visigodo">Romano-Visigodo</option>
-                    <option value="Celtíbero-Romano">Celtíbero-Romano</option>
+                    <option value="all">All periods</option>
+                    <option value="Roman">Roman</option>
+                    <option value="Visigothic">Visigothic</option>
+                    <option value="Roman-Visigothic">Roman-Visigothic</option>
+                    <option value="Celtiberian-Roman">Celtiberian-Roman</option>
                 </select>
             </div>
             <div class="legend">
-                <h4>Leyenda:</h4>
+                <h4>Legend:</h4>
                 <div class="legend-item">
                     <div class="legend-marker" style="background-color: #8B4513;"></div>
-                    <span>Romano</span>
+                    <span>Roman</span>
                 </div>
                 <div class="legend-item">
                     <div class="legend-marker" style="background-color: #800080;"></div>
-                    <span>Visigodo</span>
+                    <span>Visigothic</span>
                 </div>
                 <div class="legend-item">
                     <div class="legend-marker" style="background-color: #4B0082;"></div>
-                    <span>Romano-Visigodo</span>
+                    <span>Roman-Visigothic</span>
                 </div>
                 <div class="legend-item">
                     <div class="legend-marker" style="background-color: #CD853F;"></div>
-                    <span>Celtíbero-Romano</span>
+                    <span>Celtiberian-Roman</span>
                 </div>
             </div>
         </div>
@@ -228,8 +228,8 @@
         <div id="map"></div>
         
         <div class="sites-list">
-            <h3>Yacimientos Arqueológicos</h3>
-            <p>Haz clic en cualquier yacimiento para navegar al sitio en el mapa</p>
+            <h3>Archaeological Sites</h3>
+            <p>Click on any site to navigate to the location on the map</p>
             <div id="sitesList"></div>
         </div>
 
