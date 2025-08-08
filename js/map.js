@@ -264,6 +264,10 @@ function filterSitesByPeriod(period) {
     // Close all information windows
     closeAllInfoWindows();
     
+    // Reset map view to original position (showing all of Iberian Peninsula)
+    map.setCenter({ lat: 40.4168, lng: -3.7038 });
+    map.setZoom(6);
+    
     markers.forEach(function(markerObj) {
         if (period === 'all' || markerObj.data.period === period) {
             markerObj.marker.setVisible(true);
